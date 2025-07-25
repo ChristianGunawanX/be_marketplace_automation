@@ -2,6 +2,7 @@ package endpoints;
 
 import api.ApiManager;
 import io.restassured.response.Response;
+import java.util.Map;
 
 public class Endpoints {
     private static final String TASKS_PATH = "/dev/data-marketplace/bsc/api/v1/tasks";
@@ -12,7 +13,10 @@ public class Endpoints {
     private static final String MODALITIES_PATH = "/dev/data-marketplace/bsc/api/v1/modalities";
     private static final String FORMATS_PATH = "/dev/data-marketplace/bsc/api/v1/formats"; 
     private static final String PAYMENT_TOKEN_PATH = "/dev/data-marketplace/bsc/api/v1/queryPaymentTokenList"; 
-    private static final String DATASETS_FILTER_PATH = "/dev/data-marketplace/bsc/api/v1/datasets/filter"; 
+    private static final String DATASETS_FILTER_PATH = "/dev/data-marketplace/bsc/api/v1/datasets/filter";
+    private static final String DOWNLOADED_DATASETS_FILTER_PATH = "/dev/data-marketplace/bsc/api/v1/downloadedDatasets/filter";
+    private static final String USAGE_RIGHT_MAKER_ASK_FILTER_PATH = "/dev/data-marketplace/bsc/api/v1/usageRightMakerAsk/filter"; // New path
+    private static final String CHECK_STATUS_PATH = "/dev/data-marketplace/bsc/api/v1/checkStatus"; // New path
 
     public static Response getTasks() {
         return ApiManager.get(TASKS_PATH);
@@ -48,5 +52,17 @@ public class Endpoints {
 
     public static Response filterDatasets(Object payload) {
         return ApiManager.post(DATASETS_FILTER_PATH, payload);
+    }
+
+    public static Response filterDownloadedDatasets(Map<String, Object> queryParams, Object payload) {
+        return ApiManager.post(DOWNLOADED_DATASETS_FILTER_PATH, queryParams, payload);
+    }
+
+    public static Response filterUsageRightMakerAsk(Map<String, Object> queryParams, Object payload) {
+        return ApiManager.post(USAGE_RIGHT_MAKER_ASK_FILTER_PATH, queryParams, payload);
+    }
+
+    public static Response checkStatus(Map<String, Object> queryParams, Object payload) {
+        return ApiManager.post(CHECK_STATUS_PATH, queryParams, payload);
     }
 }
