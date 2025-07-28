@@ -1,6 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="MarketplaceApiTestSuite" verbose="1">
-    <test name="All_API_Tests">
+    <parameter name="baseUri" value="https://testnet-label-ixer7wzhr8xfd9ws.pundix.com/dev/data-marketplace/bsc" />
+
+    <test name="All_API_Tests_On_Testnet">
         <classes>
             <class name="tests.TasksTest"/>
         </classes>

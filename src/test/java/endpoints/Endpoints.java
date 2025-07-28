@@ -5,18 +5,18 @@ import io.restassured.response.Response;
 import java.util.Map;
 
 public class Endpoints {
-    private static final String TASKS_PATH = "/dev/data-marketplace/bsc/api/v1/tasks";
-    private static final String SIZE_PATH = "/dev/data-marketplace/bsc/api/v1/size";
-    private static final String LIBRARIES_PATH = "/dev/data-marketplace/bsc/api/v1/libraries"; 
-    private static final String LICENSES_PATH = "/dev/data-marketplace/bsc/api/v1/licenses";
-    private static final String LANGUAGES_PATH = "/dev/data-marketplace/bsc/api/v1/languages"; 
-    private static final String MODALITIES_PATH = "/dev/data-marketplace/bsc/api/v1/modalities";
-    private static final String FORMATS_PATH = "/dev/data-marketplace/bsc/api/v1/formats"; 
-    private static final String PAYMENT_TOKEN_PATH = "/dev/data-marketplace/bsc/api/v1/queryPaymentTokenList"; 
-    private static final String DATASETS_FILTER_PATH = "/dev/data-marketplace/bsc/api/v1/datasets/filter";
-    private static final String DOWNLOADED_DATASETS_FILTER_PATH = "/dev/data-marketplace/bsc/api/v1/downloadedDatasets/filter";
-    private static final String USAGE_RIGHT_MAKER_ASK_FILTER_PATH = "/dev/data-marketplace/bsc/api/v1/usageRightMakerAsk/filter"; // New path
-    private static final String CHECK_STATUS_PATH = "/dev/data-marketplace/bsc/api/v1/checkStatus"; // New path
+    private static final String TASKS_PATH = "/api/v1/tasks";
+    private static final String SIZE_PATH = "/api/v1/size";
+    private static final String LIBRARIES_PATH = "/api/v1/libraries"; 
+    private static final String LICENSES_PATH = "/api/v1/licenses";
+    private static final String LANGUAGES_PATH = "/api/v1/languages"; 
+    private static final String MODALITIES_PATH = "/api/v1/modalities";
+    private static final String FORMATS_PATH = "/api/v1/formats"; 
+    private static final String PAYMENT_TOKEN_PATH = "/api/v1/queryPaymentTokenList"; 
+    private static final String DATASETS_FILTER_PATH = "/api/v1/datasets/filter";
+    private static final String DOWNLOADED_DATASETS_FILTER_PATH = "/api/v1/downloadedDatasets/filter";
+    private static final String USAGE_RIGHT_MAKER_ASK_FILTER_PATH = "/api/v1/usageRightMakerAsk/filter"; // New path
+    private static final String CHECK_STATUS_PATH = "/api/v1/checkStatus"; // New path
 
     public static Response getTasks() {
         return ApiManager.get(TASKS_PATH);

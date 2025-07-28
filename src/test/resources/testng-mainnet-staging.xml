@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="MarketplaceApiTestSuite" verbose="1">
+    <parameter name="baseUri" value="http://8.222.154.96:4000" />
+
+    <test name="All_API_Tests_On_Mainnet_Staging">
+        <classes>
+            <class name="tests.TasksTest"/>
+        </classes>
+    </test>
+</suite>
