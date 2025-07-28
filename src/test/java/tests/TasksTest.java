@@ -69,30 +69,6 @@ public class TasksTest extends BaseTest {
                 .map(s -> s.trim())
                 .collect(Collectors.toList());
 
-        if (expectedLicenses.size() != licenses.size()) {
-            System.out.println("DEBUGGING LIST SIZE MISMATCH:");
-            System.out.println("Expected Size: " + expectedLicenses.size());
-            System.out.println("Actual Size  : " + licenses.size());
-
-            Set<String> expectedSet = new HashSet<>(expectedLicenses);
-            Set<String> actualSet = new HashSet<>(licenses);
-
-            // Find items that are in the actual API response but NOT in your properties file
-            Set<String> extraItemsInResponse = new HashSet<>(actualSet);
-            extraItemsInResponse.removeAll(expectedSet);
-            if (!extraItemsInResponse.isEmpty()) {
-                System.out.println("--> Extra items found in API response: " + extraItemsInResponse);
-            }
-
-            // Find items that are in your properties file but NOT in the actual API response
-            Set<String> missingItemsFromResponse = new HashSet<>(expectedSet);
-            missingItemsFromResponse.removeAll(actualSet);
-            if (!missingItemsFromResponse.isEmpty()) {
-                System.out.println("--> Missing items from API response: " + missingItemsFromResponse);
-            }
-            System.out.println("--- END DEBUGGING ---");
-        }
-
         Assert.assertEqualsNoOrder(
                 licenses.toArray(new String[0]),
                 expectedLicenses.toArray(new String[0])
@@ -166,6 +142,26 @@ public class TasksTest extends BaseTest {
         for (String address : addresses) {
             Assert.assertTrue(address.startsWith("0x"));
         }
+    }
+
+    @Test(description = "Verify POST v1/datasets/filter with a single filter")
+    public void filterDatasetsWithSort() {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("page", 1);
+        payload.put("limit", 20);
+        payload.put("name", "");
+        payload.put("sort", "recentlyCreated");
+
+        Response response = Endpoints.filterDatasets(payload);
+        response.then().log().body();
+
+        Assert.assertEquals(response.statusCode(), HttpStatus.SC_OK);
+        Assert.assertEquals((Integer) response.path("code"), HttpStatus.SC_OK);
+        Assert.assertTrue(response.path("data.total") instanceof Integer);
+        Assert.assertEquals(response.path("data.page"), payload.get("page"));
+        Assert.assertTrue(response.path("data.pages") instanceof Integer);
+        Assert.assertEquals(response.path("data.limit"), payload.get("limit"));
+        Assert.assertNotNull(response.path("data.data"));
     }
 
     @Test(description = "Verify POST v1/datasets/filter with a single filter")

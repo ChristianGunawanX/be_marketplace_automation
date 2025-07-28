@@ -7,7 +7,13 @@ on:
 
 jobs:
   run-api-tests:
+    strategy:
+      matrix:
+        environment: [testnet, mainnet-prod, mainnet-staging]
+
+    name: Run API Tests on ${{ matrix.environment }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,11 +25,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Run Maven Tests
-        run: mvn clean test
+        run: mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testng-${{ matrix.environment }}.xml
 
       - name: Upload Test Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: api-test-report
+          name: api-test-report-${{ matrix.environment }}
           path: target/surefire-reports
